@@ -5,9 +5,7 @@ from django.contrib.auth import authenticate
 class UserSerializer(serializers.ModelSerializer):
     class Meta():
         model = CustomUser
-        fields =('id','email','first_name','last_name','gender')
-
-
+        fields =('id','email','name','agree')
 
 class  CreateUserSerializer(serializers.ModelSerializer):   
     class Meta():
@@ -15,6 +13,9 @@ class  CreateUserSerializer(serializers.ModelSerializer):
         fields =('__all__')
         extra_kwargs = {
             'password' :{
+                'required':True,  
+            },
+              'name' :{
                 'required':True,  
             },
            
@@ -27,17 +28,20 @@ class  CreateUserSerializer(serializers.ModelSerializer):
     def create(self,validated_data):
         email = validated_data.get('email')
         password = validated_data.get('password')
-        user = CustomUser.objects.create_user(email=email, password=password)
+        name= validated_data.get('name')
+        agree = validated_data.get('agree')
+        user = CustomUser.objects.create_user(email=email, password=password,
+         name=name,agree=agree)
         return user
 
 
 class UpdateUserSerializer(serializers.ModelSerializer):
      class Meta():
         model = CustomUser
-        fields =('email','first_name','last_name','gender','password',)  
+        fields =('email','name','password','agree')  
      def update(self,instance,validated_data):
-       instance.gender = validated_data.get('gender', instance.gender)
-       instance.last_name = validated_data.get('gender', instance.last_name)
+       instance.name = validated_data.get('name', instance.name)
+       instance.agree = validated_data.get('agree', instance.agree)
        password = validated_data.get('password')
        if password:
            instance.set_password(password)
@@ -48,9 +52,8 @@ class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField(style={'input_type': 'password'}, trim_whitespace=False)
     
-
-    def validate(self, attrs):
-        email = attrs.get('email').lower()
+    def validate(self,  attrs,):
+        email = attrs.get('email')
         password = attrs.get('password')
         if not email or not password:
             raise serializers.ValidationError("Please give both email and password.")
