@@ -86,7 +86,7 @@ DATABASES = {
         'NAME': 'data_auth',
         'USER':'postgres',
         'PASSWORD':'Mai0398',
-        'HOST':'localhost',
+        'HOST':'127.0.0.1',
         'PORT':''
     }
 }
