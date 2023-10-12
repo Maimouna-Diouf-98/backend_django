@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-7p4njc96fyqgm05m3%jb)&g%7v$vvel0-u2a982lp__9(28g0p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -80,19 +80,19 @@ WSGI_APPLICATION = 'hello_django.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'data_auth',
-#         'USER':'postgres',
-#         'PASSWORD':'Mai0398',
-#         'HOST':'localhost',
-#         'PORT':''
-#     }
-# }
 DATABASES = {
-    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'data_auth',
+        'USER':'postgres',
+        'PASSWORD':'Mai0398',
+        'HOST':'localhost',
+        'PORT':''
+    }
 }
+# DATABASES = {
+#     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+# }
 
 
 # Password validation
