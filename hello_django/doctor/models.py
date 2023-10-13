@@ -10,7 +10,7 @@ class DoctorManage (BaseUserManager):
         return doctor
 
 class CustomDoctor(AbstractBaseUser,PermissionsMixin):
-      SEMAINE = [
+    SEMAINE = [
         ('Lundi', 'Lundi'),
         ('Mardi', 'Mardi'),
         ('Mercredi', 'Mercredi'),
