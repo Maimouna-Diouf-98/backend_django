@@ -40,7 +40,6 @@ class LoginAPIView(knox_views.LoginView):
 class LogoutAPI(APIView):
      authentication_classes = (TokenAuthentication,)
      def post(self, request):
-        request.user.auth_token_set.all().delete()
         logout(request) 
         return Response({'message': "Déconnexion réussie"}, status=status.HTTP_200_OK)
      

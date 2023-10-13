@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'rest_framework',
     "rest_framework.authtoken",
     'users',
-    'knox'
+    'knox',
+    'doctor',
 ]
 
 MIDDLEWARE = [
@@ -56,6 +57,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 AUTH_USER_MODEL = 'users.CustomUser'
+AUTH_DOCTOR_MODEL = 'doctor.CustomDoctor'
 
 ROOT_URLCONF = 'hello_django.urls'
 
@@ -130,6 +132,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
