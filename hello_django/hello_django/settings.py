@@ -92,7 +92,7 @@ WSGI_APPLICATION = 'hello_django.wsgi.application'
 #     }
 # }
 DATABASES = {
-    'default': dj_database_url.parse(config('DATABASES_URL'))
+    'default': dj_database_url.parse(config('DATABASE_URL'))
 }
 
 # Password validation
