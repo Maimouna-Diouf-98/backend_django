@@ -3,7 +3,7 @@ from . import views
 
 
 urlpatterns = [
-    path('doctor-list', views.DoctorList),
-    path('create-doctor/', views.CreateDoctor),
+    path('create-doctor/',  CreateDoctorAPI.as_view()),
+    path('create-jour/',  JourEtHeure.as_view()),
  
 ]

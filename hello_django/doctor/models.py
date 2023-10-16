@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin,Group,
 from django.contrib.auth.base_user import BaseUserManager
 # Create your models here.
 class DoctorManage (BaseUserManager):
-    def create_user(**extra_fields):
+    def create_user(self, **extra_fields):
         doctor = self.model(**extra_fields)
         doctor.save()
         return doctor
@@ -13,10 +13,11 @@ class CustomDoctor(AbstractBaseUser,PermissionsMixin):
     proffession= models.CharField(max_length=255,)
     adresse= models.CharField(max_length=255,null =True,blank=True)
     experience= models.CharField(max_length=255,null =True,blank=True)
-    heure = models.TimeField()
     about= models.CharField(max_length=255,null =True,blank=True)
     created_at= models.DateTimeField(auto_now_add=True)
     updated_at= models.DateTimeField(auto_now=True)
+    jours_disponibles = models.ManyToManyField('Jour', through='JourEtHeure', related_name='docteurs_disponibles')
+
 #  permission 
     groups = models.ManyToManyField(Group, related_name='custom_doctors')
     user_permissions = models.ManyToManyField(Permission, related_name='custom_doctors')
@@ -38,7 +39,6 @@ class Jour(models.Model):
     ]
     
     jours = models.CharField(max_length=10, choices=SEMAINE)
-    docteurs = models.ManyToManyField(CustomDoctor, related_name='jours_disponibles')
 
     def __str__(self):
         return self.jours
