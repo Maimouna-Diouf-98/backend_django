@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CustomDoctor,JourEtHeure
+from .models import CustomDoctor,Jour,Heure
 
 class DoctorSerializer(serializers.ModelSerializer):
     class Meta():
@@ -30,10 +30,10 @@ class CreateDoctorSerializer(serializers.ModelSerializer):
 
 
 
-class JourEtHeureSerialiser(serializers.ModelSerializer):
+class Jour(serializers.ModelSerializer):
        doctor = CreateDoctorSerializer(many=True, read_only=True)
        model = JourEtHeure
-       fields =('jours','heure','modele','id','doctor')
+       fields =('jours','id')
        def create(self, validated_data):
         jours = validated_data.get('jours')
         heure = validated_data.get('heure')
@@ -41,4 +41,4 @@ class JourEtHeureSerialiser(serializers.ModelSerializer):
         doctor = validated_data.get('doctor')
         jour = CustomDoctor.objects.create_user(jours=jours, heure=heure, modele=modele, 
           doctor=doctor)
-        return doctor
+        return jour
