@@ -12,6 +12,7 @@ class CreateDoctorAPI(CreateAPIView):
     queryset = CustomDoctor.objects.all()
     serializer_class = CreateDoctorSerializer
     premission_classes = (AllowAny,)
+    
 class JourEtHeure(CreateAPIView):
     queryset = JourEtHeure.objects.all()
     serializer_class = JourEtHeureSerialiser
