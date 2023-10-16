@@ -25,7 +25,7 @@ class CustomDoctor(AbstractBaseUser,PermissionsMixin):
     
     def __str__(self):
      return self.name
-    #  jour semaine
+ #  jour semaine
 class Jour(models.Model):
     SEMAINE = [
         ('Lundi', 'Lundi'),

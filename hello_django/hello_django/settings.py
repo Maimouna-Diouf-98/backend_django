@@ -28,8 +28,9 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['doctor-app-h45i.onrender.com']
+# ALLOWED_HOSTS = ['doctor-app-h45i.onrender.com']
 
+ALLOWED_HOSTS = ['doctor-app-h45i.onrender.com']
 
 # Application definition
 
