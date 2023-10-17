@@ -21,10 +21,11 @@ class CustomDoctor(AbstractBaseUser,PermissionsMixin):
     name= models.CharField(max_length=255,)
     proffession= models.CharField(max_length=255,)
     adresse= models.CharField(max_length=255,null =True,blank=True)
-    experience= models.CharField(max_length=255,null =True,blank=True)
-    about= models.CharField(max_length=255,null =True,blank=True)
+    experience= models.IntegerField(default=0,null =True,blank=True)
+    about= models.CharField(max_length=255, null=True,blank=True)
     jours = models.CharField(max_length=10,default='lundi', choices=SEMAINE)
     heure = models.TimeField(default='00:00:00')
+    image = models.ImageField(upload_to='media',null=True,blank=True)
     created_at= models.DateTimeField(auto_now_add=True)
     updated_at= models.DateTimeField(auto_now=True)
 

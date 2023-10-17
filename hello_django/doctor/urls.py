@@ -7,5 +7,4 @@ urlpatterns = [
     path('update-doctor/<int:pk>/',  views.UpdateDoctorAPI.as_view()),
     path('list-id-doctor/<int:pk>/',  views.list_id_doctor),
     path('delete-doctor/<int:pk>/',  views.delete_doctor),
-    path('up-id-doctor/<int:pk>/',  views.update_id_doctor),
 ]

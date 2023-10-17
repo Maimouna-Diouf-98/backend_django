@@ -22,9 +22,9 @@ class CreateDoctorSerializer(serializers.ModelSerializer):
         adresse = validated_data.get('adresse')
         experience = validated_data.get('experience')
         about = validated_data.get('about')
-        jours_disponibles = validated_data.get('jours_disponibles')
+        image = validated_data.get('image')
         doctor = CustomDoctor.objects.create_user(name=name, proffession=proffession, adresse=adresse,
-          experience=experience, about=about, jours=jours,heure=heure)
+          experience=experience, about=about, jours=jours,heure=heure, image=image)
         return doctor
 
 class UpdateDoctorSerializer(serializers.ModelSerializer):
@@ -39,5 +39,6 @@ class UpdateDoctorSerializer(serializers.ModelSerializer):
        instance.about= validated_data.get('about', instance.about)
        instance.jours= validated_data.get('jours', instance.jours)
        instance.heure= validated_data.get('heure', instance.heure)
+       instance.image= validated_data.get('image', instance.image)
        instance.save()
        return instance
