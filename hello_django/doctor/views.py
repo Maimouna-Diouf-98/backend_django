@@ -12,12 +12,21 @@ from rest_framework import status
 
 # # Create your views here.
 
-@api_view(['GET', 'POST'])
+@api_view(['GET', 'POST','PUT', 'DELETE'])
 def doctors_list(request):
     if request.method == 'GET':
         doctor = CustomDoctor.objects.all()
         serializer = DoctorSerializer(doctor, many=True)
         return Response(serializer.data)
+def list_id_doctor(request, pk):
+      try:
+        doctor = CustomDoctor.objects.get(pk=pk)
+      except doctorDoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+      if request.method == 'GET':
+        serializer = DoctorSerializer(doctor)
+        return Response(serializer.data)
+
 class CreateDoctorAPI(CreateAPIView):
     queryset = CustomDoctor.objects.all()
     serializer_class = CreateDoctorSerializer
