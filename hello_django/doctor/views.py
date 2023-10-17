@@ -19,13 +19,15 @@ def doctors_list(request):
         serializer = DoctorSerializer(doctor, many=True)
         return Response(serializer.data)
 def list_id_doctor(request, pk):
-      try:
+    try:
         doctor = CustomDoctor.objects.get(pk=pk)
-      except doctorDoesNotExist:
+        serializer = DoctorSerializer(doctor, many=True)
+    except CustomDoctor.DoesNotExist: 
         return Response(status=status.HTTP_404_NOT_FOUND)
-      if request.method == 'GET':
-        serializer = DoctorSerializer(doctor)
-        return Response(serializer.data)
+
+    if request.method == 'GET':
+    
+        return Response(serializer.data,content_type="application/json")
 
 class CreateDoctorAPI(CreateAPIView):
     queryset = CustomDoctor.objects.all()

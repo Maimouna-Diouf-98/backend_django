@@ -30,7 +30,7 @@ DEBUG = True
 
 # ALLOWED_HOSTS = ['doctor-app-h45i.onrender.com']
 
-ALLOWED_HOSTS = ["https://doctor-app-h45i.onrender.com/"]
+ALLOWED_HOSTS = ['doctor-app-h45i.onrender.com']
 
 # Application definition
 
