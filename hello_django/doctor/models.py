@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin,Group, Permission 
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.contrib.auth.base_user import BaseUserManager
 # Create your models here.
 class DoctorManage (BaseUserManager):
@@ -9,25 +9,6 @@ class DoctorManage (BaseUserManager):
         return doctor
 
 class CustomDoctor(AbstractBaseUser,PermissionsMixin):
-    name= models.CharField(max_length=255,)
-    proffession= models.CharField(max_length=255,)
-    adresse= models.CharField(max_length=255,null =True,blank=True)
-    experience= models.CharField(max_length=255,null =True,blank=True)
-    about= models.CharField(max_length=255,null =True,blank=True)
-    created_at= models.DateTimeField(auto_now_add=True)
-    updated_at= models.DateTimeField(auto_now=True)
-    jours_disponibles = models.ManyToManyField('Jour', through='JourEtHeure', related_name='docteurs_disponibles')
-
-#  permission 
-    groups = models.ManyToManyField(Group, related_name='custom_doctors')
-    user_permissions = models.ManyToManyField(Permission, related_name='custom_doctors')
-
-    objects = DoctorManage()
-    
-    def __str__(self):
-     return self.name
- #  jour semaine
-class Jour(models.Model):
     SEMAINE = [
         ('Lundi', 'Lundi'),
         ('Mardi', 'Mardi'),
@@ -37,23 +18,26 @@ class Jour(models.Model):
         ('Samedi', 'Samedi'),
         ('Dimanche', 'Dimanche'),
     ]
+    name= models.CharField(max_length=255,)
+    proffession= models.CharField(max_length=255,)
+    adresse= models.CharField(max_length=255,null =True,blank=True)
+    experience= models.CharField(max_length=255,null =True,blank=True)
+    about= models.CharField(max_length=255,null =True,blank=True)
+    jours = models.CharField(max_length=10,default='lundi', choices=SEMAINE)
+    heure = models.TimeField(default='00:00:00')
+    created_at= models.DateTimeField(auto_now_add=True)
+    updated_at= models.DateTimeField(auto_now=True)
+
+    groups = models.ManyToManyField('auth.Group', related_name='custom_doctors',blank=True,editable=False)
+    user_permissions = models.ManyToManyField('auth.Permission', related_name='custom_doctors',blank=True,editable=False)
+
+    objects = DoctorManage()
+    USERNAME_FIELD = 'name'
     
-    jours = models.CharField(max_length=10, choices=SEMAINE)
-
-    def __str__(self):
-        return self.jours
-# heure
-
-class Heure(models.Model):
-    heure = models.TimeField()
-
-    def __str__(self):
+    if heure:
+      def __str__(self):
         return self.heure.strftime('%H:%M')
-
-class JourEtHeure(models.Model):
-    jours = models.ForeignKey(Jour, on_delete=models.CASCADE)
-    heure = models.ForeignKey(Heure, on_delete=models.CASCADE)
-    modele = models.ForeignKey(CustomDoctor, on_delete=models.CASCADE)
-
+    
     def __str__(self):
-        return f"{self.jours} à {self.heure} pour {self.modele}"   
+     return self.name
+
