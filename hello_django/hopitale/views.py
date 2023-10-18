@@ -44,7 +44,7 @@ def delete_hopital(request, pk):
     except CustomHopitale.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     if request.method == 'DELETE':
-        snippet.delete()
+        hopital.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 # Create jour
 class JourAPI(CreateAPIView):
