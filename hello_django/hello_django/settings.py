@@ -30,7 +30,7 @@ DEBUG = True
 
 # ALLOWED_HOSTS = ['doctor-app-h45i.onrender.com']
 
-ALLOWED_HOSTS = ["doctor-app-h45i.onrender.com"]
+ALLOWED_HOSTS = ["doctor-app-h45i.onrender.com",'127.0.0.1']
 
 # Application definition
 
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'users',
     'knox',
     'doctor',
+    'hopitale',
 ]
 
 MIDDLEWARE = [
@@ -58,8 +59,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 AUTH_USER_MODEL = 'users.CustomUser'
-
 AUTH_DOCTOR_MODEL = 'doctor.CustomDoctor'
+AUTH_HOPITALE_MODEL = 'hopitale.CustomHopital'
 
 ROOT_URLCONF = 'hello_django.urls'
 
