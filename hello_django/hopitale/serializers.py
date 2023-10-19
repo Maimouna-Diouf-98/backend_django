@@ -9,19 +9,22 @@ class JourSerializer(serializers.ModelSerializer):
     class Meta:
         model = Jour_hopitale
         fields = '__all__'
+    def validate(self,  attrs):
+        jour = attrs.get('jour')
+        if  Jour_hopitale.objects.filter(jour=jour).exists():
+            raise serializers.ValidationError('jour exist.')
     def create(self, validated_data):
         jour = validated_data.get('jour')
         heure_debut = validated_data.get('heure_debut')
         heure_fin = validated_data.get('heure_fin')
-        jour= Jour_hopitale.objects.create_user(jour=jour,  heure_fin= heure_fin,heure_debut=heure_debut)
-        return jour
+        jours= Jour_hopitale.objects.create_user(jour=jour,  heure_fin= heure_fin,heure_debut=heure_debut)
+        return jours
 
 class UpdateJourSerializer(serializers.ModelSerializer):
      class Meta():
         model = Jour_hopitale
         fields ='__all__'
      def update(self,instance,validated_data):
-       instance.jour = validated_data.get('jour', instance.jour)
        instance.heure_debut= validated_data.get('heure_debut', instance.heure_debut)
        instance.heure_fin = validated_data.get('heure_fin', instance.heure_fin)
        instance.save()
