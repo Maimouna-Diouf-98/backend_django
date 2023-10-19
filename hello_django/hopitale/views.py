@@ -2,17 +2,19 @@ from django.shortcuts import render
 from rest_framework.generics import CreateAPIView,UpdateAPIView
 from rest_framework.decorators import api_view
 from rest_framework.permissions import AllowAny
-from .serializers import HopitalSerializer,CreateHopitalSerializer,JourSerializer
+from .serializers import HopitalSerializer,CreateHopitalSerializer,JourSerializer,UpdateHopitalSerializer,UpdateJourSerializer
 from .models import CustomHopitale,Jour_hopitale
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework import mixins
+from rest_framework.views import APIView
 
 # Create your views here.
 class HopitalAPI(CreateAPIView):
     queryset = CustomHopitale.objects.all()
     serializer_class = CreateHopitalSerializer
     premission_classes = (AllowAny,)
+
+#get all hopital 
 @api_view(['GET'])
 def hopital_list(request):
     if request.method == 'GET':
@@ -32,9 +34,11 @@ def list_id_hopital(request, pk):
         serializer = HopitalSerializer(hopital)
         return Response(serializer.data)
     return Response(status=status.HTTP_204_NO_CONTENT)
-# update hopital
-# class update_hopital():
-
+#  update HOPITal
+class UpdateHopitalAPI(UpdateAPIView):
+    queryset = CustomHopitale.objects.all()
+    serializer_class =UpdateHopitalSerializer
+    premission_classes = (AllowAny,)
 
 # delete hopital
 @api_view(['DELETE'])
@@ -46,6 +50,7 @@ def delete_hopital(request, pk):
     if request.method == 'DELETE':
         hopital.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+        
 # Create jour
 class JourAPI(CreateAPIView):
     queryset = Jour_hopitale.objects.all()
@@ -64,10 +69,14 @@ def jour_list(request):
 def list_id_jour(request, pk):
     try:
         jour = Jour_hopitale.objects.get(pk=pk)
-    except hopital.DoesNotExist:
+    except Jour_hopitale.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
         serializer = JourSerializer(jour)
         return Response(serializer.data)
     return Response(status=status.HTTP_204_NO_CONTENT)
+# update day
+class UpdateJourAPI(UpdateAPIView):
+    queryset = Jour_hopitale.objects.all()
+    serializer_class = UpdateJourSerializer

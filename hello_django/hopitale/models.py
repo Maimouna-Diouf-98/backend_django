@@ -27,7 +27,7 @@ class CustomHopitale(AbstractBaseUser, PermissionsMixin):
     heure = models.TimeField(default='00:00')
     date = models.DateField()
     jours = models.ManyToManyField('Jour_hopitale', related_name='hospitals', blank=True)
-
+    note = models.FloatField(null=True,blank=True, default=0.0)
     image = models.ImageField(upload_to='hopital', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
