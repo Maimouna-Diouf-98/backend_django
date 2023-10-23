@@ -26,7 +26,7 @@ class CreateDoctorSerializer(serializers.ModelSerializer):
         note = validated_data.get('note')
         
         doctor = CustomDoctor.objects.create_user(name=name, proffession=proffession, adresse=adresse,
-          experience=experience, about=about,heure=heure, image=image)
+          experience=experience, about=about,heure=heure, image=image, note=note)
         if doctor :
             doctor.jours.set(jours) 
         return doctor

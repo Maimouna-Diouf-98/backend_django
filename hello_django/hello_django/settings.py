@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'knox',
     'doctor',
     'hopitale',
+    'rendez_vous',
 ]
 
 MIDDLEWARE = [
@@ -60,7 +61,8 @@ MIDDLEWARE = [
 ]
 AUTH_USER_MODEL = 'users.CustomUser'
 AUTH_DOCTOR_MODEL = 'doctor.CustomDoctor'
-AUTH_HOPITALE_MODEL = 'hopitale.CustomHopital'
+AUTH_HOPITALE_MODEL = 'hopitale.CustomHopitale'
+AUTH_RENDER_VOUS_MODEL = 'rendez_vous.CustomRender_Vous'
 
 ROOT_URLCONF = 'hello_django.urls'
 
