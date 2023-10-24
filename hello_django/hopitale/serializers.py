@@ -44,6 +44,9 @@ class CreateHopitalSerializer(serializers.ModelSerializer):
             'name': {
                 'required': True,
             },
+            "password": {
+                 'required':False,  
+              }
         }
     def create(self, validated_data):
         name = validated_data.get('name')
@@ -57,7 +60,7 @@ class CreateHopitalSerializer(serializers.ModelSerializer):
         note = validated_data.get('note')
       
         hopital = CustomHopitale.objects.create_user(name=name, adresse=adresse,
-           date=date, heure=heure , about=about, specialist=specialist, image=image,note=note)
+           date=date, heure=heure , about=about, specialist=specialist, image=image, note=note)
         if hopital :
             hopital.jours.set(jours)   
         return hopital

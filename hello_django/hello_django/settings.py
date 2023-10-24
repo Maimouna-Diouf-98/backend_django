@@ -28,9 +28,12 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ['doctor-app-h45i.onrender.com']
 
 ALLOWED_HOSTS = ["doctor-app-h45i.onrender.com",'127.0.0.1']
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_METHODS = ['GET', 'POST', 'PUT', 'DELETE']
+CORS_ALLOW_HEADERS = ['Authorization', 'Content-Type']
+
 
 # Application definition
 
@@ -58,11 +61,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 AUTH_USER_MODEL = 'users.CustomUser'
 AUTH_DOCTOR_MODEL = 'doctor.CustomDoctor'
 AUTH_HOPITALE_MODEL = 'hopitale.CustomHopitale'
-AUTH_RENDER_VOUS_MODEL = 'rendez_vous.CustomRender_Vous'
+AUTH_RENDER_VOUS_MODEL = 'rendez_vous.CustomRendezVous'
 
 ROOT_URLCONF = 'hello_django.urls'
 

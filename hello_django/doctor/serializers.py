@@ -13,6 +13,9 @@ class CreateDoctorSerializer(serializers.ModelSerializer):
             'name': {
                 'required': True,
             },
+             "password": {
+                 'required':False,
+              }
         }
     def create(self, validated_data):
         name = validated_data.get('name')
