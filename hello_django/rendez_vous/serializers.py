@@ -6,12 +6,3 @@ class RendezVousSerializer(serializers.ModelSerializer):
     class Meta():
         model = CustomRendezVous
         fields = '__all__'
-        extra_kwargs = {
-            'card_number' :{
-                'required':True,  
-            },
-              'card_name' :{
-                'required':True,  
-            },
-           
-        }

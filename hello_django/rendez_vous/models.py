@@ -3,10 +3,10 @@ from django.db import models
 class CustomRendezVous(models.Model):
     # Choices pour la durée
     DURATION = [
-        ('30 minutes', '30 minutes'),  # Ajusté la valeur pour correspondre au choix
+        ('30 minutes', '30 minutes'),  
         ('1 heure', '1 heure'),
-        ('1 heure 30 minutes', '1 heure 30 minutes'),  # Ajusté la valeur
-        ('2 heures', '2 heures'),  # Ajusté la valeur
+        ('1 heure 30 minutes', '1 heure 30 minutes'), 
+        ('2 heures', '2 heures'),  
     ]
     
     # Choices pour le package
@@ -19,7 +19,7 @@ class CustomRendezVous(models.Model):
 
     # Choices pour le montant (amount)
     AMOUNT = [
-        (20, '20'),  # Les valeurs numériques sont associées à des chaînes de caractères
+        (20, '20'), 
         (40, '40'),
         (60, '60'),
         (100, '100'),
@@ -55,13 +55,13 @@ class CustomRendezVous(models.Model):
     gender = models.CharField(max_length=50, choices=GENDER, default='Male')
     age = models.IntegerField(null=True, blank=True, default=10)
     probleme = models.CharField(null=True, blank=True, default='bonjour')
-    payment = models.CharField(max_length=50, choices=PAYMENT, default="Paypal")  # Corrigé la faute de frappe ici
-    card_name = models.CharField(max_length=255, default="mai")
-    card_number = models.IntegerField(default=23456)
-    expiry_date = models.DateField(default='2023-10-10')
-    cvv = models.IntegerField(default=3)
-    save_to_database = models.BooleanField(default=False)  # Champs renommé pour éviter la collision de nom
-    cash_payment = models.BooleanField(default=False)  # Champs renommé
+    payment = models.CharField(null=True, blank=True,max_length=50, choices=PAYMENT, default="") 
+    card_name = models.CharField(null=True, blank=True,max_length=255, default="")
+    card_number = models.IntegerField(null=True, blank=True,default=0)
+    expiry_date = models.DateField(null=True, blank=True,default='')
+    cvv = models.IntegerField(null=True, blank=True,default=0)
+    save_to_database = models.BooleanField(null=True, blank=True,default=False)  
+    cash_payment = models.BooleanField(null=True, blank=True,default=False)  
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
