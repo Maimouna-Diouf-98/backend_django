@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     "rest_framework.authtoken",
+    'drf_yasg',
     'users',
     'knox',
     'doctor',
@@ -155,4 +156,11 @@ REST_FRAMEWORK ={
 REST_KNOX = {
     'USER_SERIALIZER': 'users.serializers.UserSerializer',
     'TOKEN_TTL': timedelta(hours=48)
+}
+SWAGGER_SETTINGS = {
+    
+    # 'VALIDATOR_URL': 'http://localhost:8189',
+    'LOGIN_URL':'/admin/login/',
+    'LOGOUT_URL':'/admin/logout/',
+   
 }

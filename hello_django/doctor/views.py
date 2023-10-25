@@ -1,5 +1,8 @@
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 from django.shortcuts import render
 from rest_framework.views import APIView
+from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -7,19 +10,25 @@ from .serializers import DoctorSerializer,JourSerializer
 from .models import CustomDoctor,Jour_Doctor
 from rest_framework import status
 
+# swagger
 
 # # Create your views here.
 #  create doctor
-class CreateDoctorAPI(APIView):
-     def post(self, request, format=None):
+class CreateDoctorAPI(generics.CreateAPIView):
+    queryset = CustomDoctor.objects.all()
+    serializer_class = DoctorSerializer
+   
+    def post(self, request, format=None):
         serializer = DoctorSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()  
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 #  get all doctors
 @api_view(['GET'])
 def doctors_list(request):
+  
     if request.method == 'GET':
         doctor = CustomDoctor.objects.all()
         serializer = DoctorSerializer(doctor, many=True)

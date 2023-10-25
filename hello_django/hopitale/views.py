@@ -14,6 +14,7 @@ class HopitalAPI(APIView):
             serializer.save()  
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
 #get all hopital 
 @api_view(['GET'])
 def hopital_list(request):
@@ -142,4 +143,18 @@ def list_id_special(request, pk):
         serializer = SpecialistSerializer(specialist)
         return Response(serializer.data)
     return Response(status=status.HTTP_204_NO_CONTENT)
-      
+             
+# update
+@api_view(['PUT'])
+def update_special(request, pk):
+    try:
+        carte = Specialist.objects.get(pk=pk)
+    except Specialist.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'PUT':
+        serializer = SpecialistSerializer(carte, data=request.data)
+        if serializer.is_valid():
+           serializer.save()
+           return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

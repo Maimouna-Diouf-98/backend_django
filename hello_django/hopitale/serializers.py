@@ -17,5 +17,4 @@ class HopitalSerializer(serializers.ModelSerializer):
     specialist = SpecialistSerializer(many=True)
     class Meta():
         model = CustomHopitale
-        
         fields = '__all__'
