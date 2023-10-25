@@ -12,7 +12,7 @@ class CustomHopitale(models.Model):
     ]
 
     name = models.CharField(max_length=255, unique=True)
-    specialists = models.ManyToManyField('Specialist', blank=True)
+    specialist = models.ManyToManyField('Specialist', blank=True)
     adresse = models.CharField(max_length=255, null=True, blank=True)
     about = models.CharField(max_length=255, null=True, blank=True)
     heure = models.TimeField(default='00:00')

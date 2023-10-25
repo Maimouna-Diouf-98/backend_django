@@ -56,11 +56,7 @@ class CustomRendezVous(models.Model):
     age = models.IntegerField(null=True, blank=True, default=10)
     probleme = models.CharField(null=True, blank=True, default='bonjour')
     payment = models.CharField(null=True, blank=True,max_length=50, choices=PAYMENT, default="") 
-    card_name = models.CharField(null=True, blank=True,max_length=255, default="")
-    card_number = models.IntegerField(null=True, blank=True,default=0)
-    expiry_date = models.DateField(null=True, blank=True,default='')
-    cvv = models.IntegerField(null=True, blank=True,default=0)
-    save_to_database = models.BooleanField(null=True, blank=True,default=False)  
+    carte= models.ManyToManyField('Carte', blank=True)
     cash_payment = models.BooleanField(null=True, blank=True,default=False)  
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -68,3 +64,13 @@ class CustomRendezVous(models.Model):
    
     def __str__(self):
         return self.name_medecin
+class Carte(models.Model):
+    card_name = models.CharField(null=True, blank=True,max_length=255, default="")
+    card_number = models.IntegerField(null=True, blank=True,default=0)
+    expiry_date = models.DateField(null=True, blank=True,default='')
+    cvv = models.IntegerField(null=True, blank=True,default=0)
+    save_to_database = models.BooleanField(null=True, blank=True,default=False) 
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return self.card_name
