@@ -16,5 +16,6 @@ class HopitalSerializer(serializers.ModelSerializer):
     jours = JourSerializer(many=True)
     specialist = SpecialistSerializer(many=True)
     class Meta():
-        model = Specialist
+        model = CustomHopitale
+        
         fields = '__all__'
