@@ -18,3 +18,10 @@ class HopitalSerializer(serializers.ModelSerializer):
     class Meta():
         model = CustomHopitale
         fields = '__all__'
+class ListHopitalSerializer(serializers.ModelSerializer):
+    jours = JourSerializer(many=True)
+    specialist =SpecialistSerializer(many=True)
+    class Meta():
+        model = CustomHopitale
+        fields = '__all__'
+

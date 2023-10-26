@@ -3,7 +3,7 @@ from hopitale import views
 
 urlpatterns = [
     path('create-hopital/', views.HopitalAPI.as_view()),
-    path('create-jour/', views.JourAPI.as_view()),
+    # path('create-jour/', views.JourAPI.as_view()),
     path('create-specialist/', views.SpecialistAPI.as_view()),
     path('list_hopital/', views.hopital_list),
     path('list_jour/', views.jour_list),

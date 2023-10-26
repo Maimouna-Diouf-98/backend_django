@@ -1,12 +1,11 @@
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 from django.shortcuts import render
-from rest_framework.views import APIView
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
-from .serializers import DoctorSerializer,JourSerializer
+from .serializers import DoctorSerializer,JourSerializer,DoctorListSerializer
 from .models import CustomDoctor,Jour_Doctor
 from rest_framework import status
 
@@ -31,7 +30,7 @@ class CreateDoctorAPI(generics.CreateAPIView):
 #  get all doctors
 class DoctorListView(generics.ListAPIView):
     queryset = CustomDoctor.objects.all()
-    serializer_class = DoctorSerializer
+    serializer_class =  DoctorListSerializer
 #  get one doctor
 @api_view(['GET'])
 def list_id_doctor(request, pk):
@@ -41,7 +40,7 @@ def list_id_doctor(request, pk):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        serializer = DoctorSerializer(doctor)
+        serializer = DoctorListSerializer(doctor)
         return Response(serializer.data)
     return Response(status=status.HTTP_204_NO_CONTENT)
 # update doctor
