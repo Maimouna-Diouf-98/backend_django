@@ -5,6 +5,7 @@ class JourSerializer(serializers.ModelSerializer):
     class Meta():
         model = Jour_hopitale
         fields = '__all__'
+        ref_name = 'hopital_jour' 
         # Specialist
 class SpecialistSerializer(serializers.ModelSerializer):
     class Meta():

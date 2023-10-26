@@ -50,6 +50,6 @@ class Jour_hopitale(models.Model):
         return f"{self.jour} - De {self.heure_debut} à {self.heure_fin}"
 
 class Specialist(models.Model):
-  specialist = models.CharField(max_length=255)
+  specialist = models.CharField(max_length=255,unique=True)
   def __str__(self):
         return self.specialist
