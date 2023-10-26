@@ -13,8 +13,8 @@ class SpecialistSerializer(serializers.ModelSerializer):
 
 # create hopital 
 class HopitalSerializer(serializers.ModelSerializer):
-    jours = JourSerializer(many=True)
-    specialist = SpecialistSerializer(many=True)
+    jours = serializers.PrimaryKeyRelatedField(many=True, queryset=Jour_hopitale.objects.all())
+    specialist =serializers.PrimaryKeyRelatedField(many=True, queryset=Specialist.objects.all())
     class Meta():
         model = CustomHopitale
         fields = '__all__'

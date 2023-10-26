@@ -7,7 +7,6 @@ class CarteSerializer(serializers.ModelSerializer):
         model = Carte
         fields = '__all__'
 class RendezVousSerializer(serializers.ModelSerializer):
-    carte =CarteSerializer(many=True)
     class Meta():
         model = CustomRendezVous
         fields = '__all__'

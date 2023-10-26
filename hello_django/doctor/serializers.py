@@ -7,15 +7,9 @@ class JourSerializer(serializers.ModelSerializer):
         fields = '__all__'
 # doctor
 class DoctorSerializer(serializers.ModelSerializer):
-    jours = JourSerializer(many=True)
+    jours = serializers.PrimaryKeyRelatedField(many=True, queryset=Jour_Doctor.objects.all())
     class Meta():
-      model=CustomDoctor
-      fields ='__all__'
-    def create(self, validated_data):
-            jours_data = validated_data.get('jours', []) 
-
-            doctor = CustomDoctor.objects.create(**validated_data)
-            jours = [Jour.objects.get_or_create(nom=jour_data['nom'])[0] for jour_data in jours_data]
-            doctor.jours.set(jours)
-
-            return doctor
+        model=CustomDoctor
+        fields ='__all__'
+ 
+ 

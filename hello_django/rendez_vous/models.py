@@ -56,7 +56,7 @@ class CustomRendezVous(models.Model):
     age = models.IntegerField(null=True, blank=True, default=10)
     probleme = models.CharField(null=True, blank=True, default='bonjour')
     payment = models.CharField(null=True, blank=True,max_length=50, choices=PAYMENT, default="") 
-    carte= models.ManyToManyField('Carte', blank=True)
+    # carte= models.ManyToManyField('Carte', blank=True)
     cash_payment = models.BooleanField(null=True, blank=True,default=False)  
 
     created_at = models.DateTimeField(auto_now_add=True)
