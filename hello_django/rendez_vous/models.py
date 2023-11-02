@@ -1,5 +1,5 @@
 from django.db import models
-
+from users.models import CustomUser
 class CustomRendezVous(models.Model):
     # Choices pour la durée
     DURATION = [
@@ -65,12 +65,15 @@ class CustomRendezVous(models.Model):
     def __str__(self):
         return self.name_medecin
 class Carte(models.Model):
-    card_name = models.CharField(null=True, blank=True,max_length=255, default="")
+    card_name = models.CharField(null=True, blank=True, default="")
     card_number = models.IntegerField(null=True, blank=True,default=0)
-    expiry_date = models.DateField(null=True, blank=True,default='')
+    expiry_date = models.DateField(null=True, blank=True,default='YY-MM')
     cvv = models.IntegerField(null=True, blank=True,default=0)
     save_to_database = models.BooleanField(null=True, blank=True,default=False) 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+   
     def __str__(self):
-        return self.card_name
+         if self.expiry_date:
+           return self.expiry_date.strftime('%m-%y') 
+         return self.card_name

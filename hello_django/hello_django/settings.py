@@ -93,19 +93,19 @@ WSGI_APPLICATION = 'hello_django.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'data_auth',
-#         'USER':'postgres',
-#         'PASSWORD':'Mai0398',
-#         'HOST':'127.0.0.1',
-#         'PORT':''
-#     }
-# }
 DATABASES = {
-    'default': dj_database_url.parse(config('DATABASE_URL'))
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'data_auth',
+        'USER':'postgres',
+        'PASSWORD':'Mai0398',
+        'HOST':'127.0.0.1',
+        'PORT':''
+    }
 }
+# DATABASES = {
+#     'default': dj_database_url.parse(config('DATABASE_URL'))
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
