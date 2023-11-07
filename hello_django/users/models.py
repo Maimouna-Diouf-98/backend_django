@@ -26,9 +26,15 @@ class UserManage (BaseUserManager):
 
 
 class CustomUser(AbstractBaseUser,PermissionsMixin):
+    GENDER = [
+        ('Male', 'Male'),
+        ('Female', 'Female'),
+    ]
     email = models.EmailField(max_length=250, unique=True)
     password= models.CharField(max_length=128,null =True)
     name= models.CharField(max_length=255,null =True,blank=True)
+    phone= models.IntegerField(null =True,blank=True,default=0)
+    gender = models.CharField(max_length=50, choices=GENDER, default='')
     created_at= models.DateTimeField(auto_now_add=True)
     updated_at= models.DateTimeField(auto_now=True)
     is_staff= models.BooleanField(default=False,editable=False)
