@@ -12,13 +12,13 @@ class RendezVousAPI(generics.CreateAPIView):
     serializer_class = RendezVousSerializer 
     def post(self, request, format=None):
      data = request.data
-     carte_id = data.get('carte', []) 
+    #  carte_id = data.get('carte', []) 
      serializer = self.get_serializer(data=data)
      if serializer.is_valid():
         self.perform_create(serializer)
         rendez_vous = CustomRendezVous.objects.get(id=serializer.data['id'])
-        carte = Carte.objects.filter(id__in=carte_id)
-        rendez_vous.carte.set(carte)
+        # carte = Carte.objects.filter(id__in=carte_id)
+        # rendez_vous.carte.set(carte)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
      return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
